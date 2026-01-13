@@ -1,0 +1,1294 @@
+{
+  "app": {
+    "title": "Kali4Us",
+    "subtitle": "Incorperating all Kali Linux commands"
+  },
+  "commands": [
+    {
+      "id": "help-man",
+      "title": "help: manual page",
+      "cmd": "man <command>",
+      "desc": "Open manual page for a command.",
+      "category": "help",
+      "tags": [
+        "docs"
+      ],
+      "notes": "Use q to quit.",
+      "examples": [
+        "man ls",
+        "man systemctl"
+      ]
+    },
+    {
+      "id": "help-tldr",
+      "title": "help: tldr pages",
+      "cmd": "tldr <command>",
+      "desc": "Community examples for commands.",
+      "category": "help",
+      "tags": [
+        "docs"
+      ],
+      "notes": "Install: sudo apt install tldr (if missing).",
+      "examples": [
+        "tldr tar",
+        "tldr ip"
+      ]
+    },
+    {
+      "id": "help-which",
+      "title": "help: find executable path",
+      "cmd": "which <command>",
+      "desc": "Show path of a command.",
+      "category": "help",
+      "tags": [
+        "path"
+      ],
+      "notes": "Use type -a to show all matches.",
+      "examples": [
+        "which python3",
+        "type -a gcc"
+      ]
+    },
+    {
+      "id": "help-whereis",
+      "title": "help: locate binaries/docs",
+      "cmd": "whereis <command>",
+      "desc": "Find binary/source/man locations.",
+      "category": "help",
+      "tags": [
+        "path"
+      ],
+      "notes": "",
+      "examples": [
+        "whereis nmap"
+      ]
+    },
+    {
+      "id": "help-apropos",
+      "title": "help: search man pages",
+      "cmd": "apropos <keyword>",
+      "desc": "Search descriptions of man pages.",
+      "category": "help",
+      "tags": [
+        "docs",
+        "search"
+      ],
+      "notes": "Similar: man -k <keyword>.",
+      "examples": [
+        "apropos firewall",
+        "apropos network"
+      ]
+    },
+    {
+      "id": "fs-ls",
+      "title": "fs: list files",
+      "cmd": "ls -lah",
+      "desc": "List files with details, hidden, human sizes.",
+      "category": "filesystem",
+      "tags": [
+        "list"
+      ],
+      "notes": "",
+      "examples": [
+        "ls -lah /etc",
+        "ls -lah ~"
+      ]
+    },
+    {
+      "id": "fs-cd",
+      "title": "fs: change directory",
+      "cmd": "cd <path>",
+      "desc": "Move to directory.",
+      "category": "filesystem",
+      "tags": [
+        "navigate"
+      ],
+      "notes": "cd - toggles previous directory.",
+      "examples": [
+        "cd /var/log",
+        "cd -"
+      ]
+    },
+    {
+      "id": "fs-pwd",
+      "title": "fs: show current directory",
+      "cmd": "pwd",
+      "desc": "Print working directory.",
+      "category": "filesystem",
+      "tags": [
+        "navigate"
+      ],
+      "notes": "",
+      "examples": [
+        "pwd"
+      ]
+    },
+    {
+      "id": "fs-mkdir",
+      "title": "fs: make directory",
+      "cmd": "mkdir -p <dir>",
+      "desc": "Create directory (with parents).",
+      "category": "filesystem",
+      "tags": [
+        "create"
+      ],
+      "notes": "",
+      "examples": [
+        "mkdir -p tools/output"
+      ]
+    },
+    {
+      "id": "fs-rm",
+      "title": "fs: remove files",
+      "cmd": "rm -i <file>",
+      "desc": "Remove a file (interactive).",
+      "category": "filesystem",
+      "tags": [
+        "delete"
+      ],
+      "notes": "Be careful with rm -rf.",
+      "examples": [
+        "rm -i notes.txt"
+      ]
+    },
+    {
+      "id": "fs-cp",
+      "title": "fs: copy",
+      "cmd": "cp -av <src> <dst>",
+      "desc": "Copy with attributes + verbose.",
+      "category": "filesystem",
+      "tags": [
+        "copy"
+      ],
+      "notes": "",
+      "examples": [
+        "cp -av /etc/hosts backup/hosts"
+      ]
+    },
+    {
+      "id": "fs-mv",
+      "title": "fs: move/rename",
+      "cmd": "mv -iv <src> <dst>",
+      "desc": "Move/rename with interactive + verbose.",
+      "category": "filesystem",
+      "tags": [
+        "move"
+      ],
+      "notes": "",
+      "examples": [
+        "mv -iv old.txt new.txt"
+      ]
+    },
+    {
+      "id": "fs-find",
+      "title": "fs: find files",
+      "cmd": "find <path> -type f -name \"*.log\"",
+      "desc": "Find files by name/type.",
+      "category": "filesystem",
+      "tags": [
+        "search"
+      ],
+      "notes": "",
+      "examples": [
+        "find /var/log -type f -name \"*.log\""
+      ]
+    },
+    {
+      "id": "fs-grep",
+      "title": "fs: grep text",
+      "cmd": "rg \"pattern\" <path>",
+      "desc": "Fast recursive search (ripgrep).",
+      "category": "filesystem",
+      "tags": [
+        "search",
+        "text"
+      ],
+      "notes": "Install: sudo apt install ripgrep.",
+      "examples": [
+        "rg \"error\" /var/log"
+      ]
+    },
+    {
+      "id": "fs-cat",
+      "title": "fs: print file",
+      "cmd": "cat <file>",
+      "desc": "Print file contents.",
+      "category": "filesystem",
+      "tags": [
+        "read"
+      ],
+      "notes": "For big files use less.",
+      "examples": [
+        "cat /etc/os-release"
+      ]
+    },
+    {
+      "id": "fs-less",
+      "title": "fs: view file (pager)",
+      "cmd": "less <file>",
+      "desc": "View file with paging/search.",
+      "category": "filesystem",
+      "tags": [
+        "read"
+      ],
+      "notes": "Search with /pattern, quit with q.",
+      "examples": [
+        "less /var/log/syslog"
+      ]
+    },
+    {
+      "id": "fs-tail",
+      "title": "fs: follow logs",
+      "cmd": "tail -f <file>",
+      "desc": "Follow a file as it grows.",
+      "category": "filesystem",
+      "tags": [
+        "logs"
+      ],
+      "notes": "Use -n 200 for last 200 lines.",
+      "examples": [
+        "tail -n 200 /var/log/auth.log"
+      ]
+    },
+    {
+      "id": "sys-neofetch",
+      "title": "system: system info",
+      "cmd": "neofetch",
+      "desc": "Show OS/hardware summary.",
+      "category": "system",
+      "tags": [
+        "info"
+      ],
+      "notes": "Install if missing: sudo apt install neofetch.",
+      "examples": [
+        "neofetch"
+      ]
+    },
+    {
+      "id": "sys-uname",
+      "title": "system: kernel info",
+      "cmd": "uname -a",
+      "desc": "Kernel and system info.",
+      "category": "system",
+      "tags": [
+        "info"
+      ],
+      "notes": "",
+      "examples": [
+        "uname -a"
+      ]
+    },
+    {
+      "id": "sys-lsb",
+      "title": "system: distro info",
+      "cmd": "lsb_release -a",
+      "desc": "Distribution information.",
+      "category": "system",
+      "tags": [
+        "info"
+      ],
+      "notes": "",
+      "examples": [
+        "lsb_release -a"
+      ]
+    },
+    {
+      "id": "sys-df",
+      "title": "system: disk free",
+      "cmd": "df -hT",
+      "desc": "Disk usage by filesystem type.",
+      "category": "system",
+      "tags": [
+        "disk"
+      ],
+      "notes": "",
+      "examples": [
+        "df -hT"
+      ]
+    },
+    {
+      "id": "sys-du",
+      "title": "system: folder sizes",
+      "cmd": "du -h --max-depth=1 | sort -h",
+      "desc": "Sort directory sizes.",
+      "category": "system",
+      "tags": [
+        "disk"
+      ],
+      "notes": "Run inside a folder.",
+      "examples": [
+        "du -h --max-depth=1 /var | sort -h"
+      ]
+    },
+    {
+      "id": "sys-free",
+      "title": "system: memory usage",
+      "cmd": "free -h",
+      "desc": "Memory usage summary.",
+      "category": "system",
+      "tags": [
+        "memory"
+      ],
+      "notes": "",
+      "examples": [
+        "free -h"
+      ]
+    },
+    {
+      "id": "sys-uptime",
+      "title": "system: uptime",
+      "cmd": "uptime",
+      "desc": "System uptime + load average.",
+      "category": "system",
+      "tags": [
+        "info"
+      ],
+      "notes": "",
+      "examples": [
+        "uptime"
+      ]
+    },
+    {
+      "id": "sys-top",
+      "title": "system: process monitor",
+      "cmd": "htop",
+      "desc": "Interactive process viewer.",
+      "category": "system",
+      "tags": [
+        "process"
+      ],
+      "notes": "Install: sudo apt install htop.",
+      "examples": [
+        "htop"
+      ]
+    },
+    {
+      "id": "sys-ps",
+      "title": "system: list processes",
+      "cmd": "ps aux --sort=-%mem | head",
+      "desc": "Top processes by memory.",
+      "category": "system",
+      "tags": [
+        "process"
+      ],
+      "notes": "",
+      "examples": [
+        "ps aux --sort=-%cpu | head"
+      ]
+    },
+    {
+      "id": "sys-kill",
+      "title": "system: kill process",
+      "cmd": "kill -TERM <pid>",
+      "desc": "Stop process gracefully.",
+      "category": "system",
+      "tags": [
+        "process"
+      ],
+      "notes": "Use -KILL only if needed.",
+      "examples": [
+        "kill -TERM 1234"
+      ]
+    },
+    {
+      "id": "svc-systemctl",
+      "title": "services: systemctl status",
+      "cmd": "systemctl status <service>",
+      "desc": "Check a service status.",
+      "category": "services",
+      "tags": [
+        "systemd"
+      ],
+      "notes": "",
+      "examples": [
+        "systemctl status ssh"
+      ]
+    },
+    {
+      "id": "svc-restart",
+      "title": "services: restart service",
+      "cmd": "sudo systemctl restart <service>",
+      "desc": "Restart a service.",
+      "category": "services",
+      "tags": [
+        "systemd"
+      ],
+      "notes": "",
+      "examples": [
+        "sudo systemctl restart ssh"
+      ]
+    },
+    {
+      "id": "svc-enable",
+      "title": "services: enable at boot",
+      "cmd": "sudo systemctl enable <service>",
+      "desc": "Enable service on startup.",
+      "category": "services",
+      "tags": [
+        "systemd"
+      ],
+      "notes": "",
+      "examples": [
+        "sudo systemctl enable ssh"
+      ]
+    },
+    {
+      "id": "log-journal",
+      "title": "logs: journalctl",
+      "cmd": "journalctl -xe",
+      "desc": "View systemd logs (errors + context).",
+      "category": "logs",
+      "tags": [
+        "systemd"
+      ],
+      "notes": "Use -u <service> for a service.",
+      "examples": [
+        "journalctl -u ssh -xe"
+      ]
+    },
+    {
+      "id": "pkg-update",
+      "title": "packages: update lists",
+      "cmd": "sudo apt update",
+      "desc": "Update package index.",
+      "category": "packages",
+      "tags": [
+        "apt"
+      ],
+      "notes": "",
+      "examples": [
+        "sudo apt update"
+      ]
+    },
+    {
+      "id": "pkg-upgrade",
+      "title": "packages: upgrade",
+      "cmd": "sudo apt upgrade -y",
+      "desc": "Upgrade installed packages.",
+      "category": "packages",
+      "tags": [
+        "apt"
+      ],
+      "notes": "",
+      "examples": [
+        "sudo apt upgrade -y"
+      ]
+    },
+    {
+      "id": "pkg-install",
+      "title": "packages: install",
+      "cmd": "sudo apt install <pkg>",
+      "desc": "Install a package.",
+      "category": "packages",
+      "tags": [
+        "apt"
+      ],
+      "notes": "",
+      "examples": [
+        "sudo apt install curl"
+      ]
+    },
+    {
+      "id": "pkg-search",
+      "title": "packages: search",
+      "cmd": "apt-cache search <keyword>",
+      "desc": "Search packages by keyword.",
+      "category": "packages",
+      "tags": [
+        "apt"
+      ],
+      "notes": "",
+      "examples": [
+        "apt-cache search wireshark"
+      ]
+    },
+    {
+      "id": "pkg-show",
+      "title": "packages: show info",
+      "cmd": "apt-cache show <pkg>",
+      "desc": "Show package details.",
+      "category": "packages",
+      "tags": [
+        "apt"
+      ],
+      "notes": "",
+      "examples": [
+        "apt-cache show nmap"
+      ]
+    },
+    {
+      "id": "net-ip",
+      "title": "network: interfaces",
+      "cmd": "ip a",
+      "desc": "Show network interfaces and IPs.",
+      "category": "network",
+      "tags": [
+        "ip"
+      ],
+      "notes": "",
+      "examples": [
+        "ip a"
+      ]
+    },
+    {
+      "id": "net-route",
+      "title": "network: routing table",
+      "cmd": "ip route",
+      "desc": "Show routes.",
+      "category": "network",
+      "tags": [
+        "route"
+      ],
+      "notes": "",
+      "examples": [
+        "ip route"
+      ]
+    },
+    {
+      "id": "net-ss",
+      "title": "network: listening ports",
+      "cmd": "ss -tulpn",
+      "desc": "Show listening TCP/UDP sockets.",
+      "category": "network",
+      "tags": [
+        "ports"
+      ],
+      "notes": "May need sudo to see process names.",
+      "examples": [
+        "sudo ss -tulpn"
+      ]
+    },
+    {
+      "id": "net-dig",
+      "title": "network: DNS query",
+      "cmd": "dig <domain>",
+      "desc": "Query DNS records.",
+      "category": "network",
+      "tags": [
+        "dns"
+      ],
+      "notes": "",
+      "examples": [
+        "dig example.com"
+      ]
+    },
+    {
+      "id": "net-curl",
+      "title": "network: http request",
+      "cmd": "curl -i -sS <url>",
+      "desc": "Fetch headers + body.",
+      "category": "network",
+      "tags": [
+        "http"
+      ],
+      "notes": "Use -v for verbose.",
+      "examples": [
+        "curl -I https://example.com"
+      ]
+    },
+    {
+      "id": "net-wget",
+      "title": "network: download file",
+      "cmd": "wget <url>",
+      "desc": "Download content from URL.",
+      "category": "network",
+      "tags": [
+        "download"
+      ],
+      "notes": "",
+      "examples": [
+        "wget https://example.com/file.zip"
+      ]
+    },
+    {
+      "id": "net-ssh",
+      "title": "network: ssh",
+      "cmd": "ssh <user>@<host>",
+      "desc": "Remote shell via SSH.",
+      "category": "network",
+      "tags": [
+        "ssh"
+      ],
+      "notes": "Use keys for better security.",
+      "examples": [
+        "ssh user@192.168.1.10"
+      ]
+    },
+    {
+      "id": "net-scp",
+      "title": "network: scp copy",
+      "cmd": "scp <src> <user>@<host>:<dst>",
+      "desc": "Copy files over SSH.",
+      "category": "network",
+      "tags": [
+        "ssh",
+        "copy"
+      ],
+      "notes": "",
+      "examples": [
+        "scp file.txt user@host:/tmp/"
+      ]
+    },
+    {
+      "id": "net-rsync",
+      "title": "network: rsync",
+      "cmd": "rsync -avh <src> <dst>",
+      "desc": "Fast incremental copy/sync.",
+      "category": "network",
+      "tags": [
+        "sync"
+      ],
+      "notes": "Over SSH: rsync -avh -e ssh ...",
+      "examples": [
+        "rsync -avh dir/ backup/"
+      ]
+    },
+    {
+      "id": "net-tcpdump",
+      "title": "network: capture packets",
+      "cmd": "sudo tcpdump -i <iface>",
+      "desc": "Packet capture (CLI).",
+      "category": "network",
+      "tags": [
+        "capture"
+      ],
+      "notes": "Use only on networks you are authorized to monitor.",
+      "examples": [
+        "sudo tcpdump -i eth0"
+      ]
+    },
+    {
+      "id": "user-whoami",
+      "title": "users: whoami",
+      "cmd": "whoami",
+      "desc": "Show current user.",
+      "category": "users",
+      "tags": [
+        "identity"
+      ],
+      "notes": "",
+      "examples": [
+        "whoami"
+      ]
+    },
+    {
+      "id": "user-id",
+      "title": "users: id details",
+      "cmd": "id",
+      "desc": "Show UID/GID and groups.",
+      "category": "users",
+      "tags": [
+        "identity"
+      ],
+      "notes": "",
+      "examples": [
+        "id"
+      ]
+    },
+    {
+      "id": "user-sudo",
+      "title": "users: sudo shell",
+      "cmd": "sudo -s",
+      "desc": "Start root shell (if allowed).",
+      "category": "users",
+      "tags": [
+        "admin"
+      ],
+      "notes": "Prefer sudo <command> over staying root.",
+      "examples": [
+        "sudo -s"
+      ]
+    },
+    {
+      "id": "arch-tar",
+      "title": "archive: tar extract",
+      "cmd": "tar -xvf <file.tar>",
+      "desc": "Extract a tar archive.",
+      "category": "archive",
+      "tags": [
+        "tar"
+      ],
+      "notes": "Use -z for .tar.gz.",
+      "examples": [
+        "tar -xzvf file.tar.gz"
+      ]
+    },
+    {
+      "id": "arch-zip",
+      "title": "archive: zip folder",
+      "cmd": "zip -r <out.zip> <folder>",
+      "desc": "Zip a folder recursively.",
+      "category": "archive",
+      "tags": [
+        "zip"
+      ],
+      "notes": "Install zip/unzip if needed.",
+      "examples": [
+        "zip -r backup.zip myfolder/"
+      ]
+    },
+    {
+      "id": "arch-unzip",
+      "title": "archive: unzip",
+      "cmd": "unzip <file.zip>",
+      "desc": "Extract zip archive.",
+      "category": "archive",
+      "tags": [
+        "zip"
+      ],
+      "notes": "",
+      "examples": [
+        "unzip tools.zip"
+      ]
+    },
+    { "id": "git-clone", "title": "git: clone repository", "cmd": "git clone <url>", "desc": "Download a tool or project from GitHub/GitLab.", "category": "git", "tags": ["download"], "notes": "The primary way to install community tools in Kali.", "examples": ["git clone https://github.com/sqlmapproject/sqlmap.git"] },
+    { "id": "git-pull", "title": "git: update tool", "cmd": "git pull", "desc": "Fetch and merge the latest updates for a tool.", "category": "git", "tags": ["update"], "notes": "Run this inside the tool's directory to get the latest exploit definitions.", "examples": ["git pull"] },
+    { "id": "git-init", "title": "git: initialize repo", "cmd": "git init", "desc": "Start tracking changes in the current folder.", "category": "git", "tags": ["setup"], "notes": "Creates a hidden .git directory.", "examples": ["git init"] },
+    { "id": "git-status", "title": "git: check status", "cmd": "git status", "desc": "See which files are modified or untracked.", "category": "git", "tags": ["info"], "notes": "Essential before committing changes to your scripts.", "examples": ["git status"] },
+    { "id": "git-log", "title": "git: view history", "cmd": "git log --oneline", "desc": "Show a compact list of past commits.", "category": "git", "tags": ["info"], "notes": "Useful for OSINT to see who contributed to a project and when.", "examples": ["git log --oneline -n 5"] },
+    { "id": "git-add", "title": "git: stage changes", "cmd": "git add .", "desc": "Prepare all changed files for a commit.", "category": "git", "tags": ["manage"], "notes": "Use 'git add <file>' for specific files.", "examples": ["git add exploit.py"] },
+    { "id": "git-commit", "title": "git: save changes", "cmd": "git commit -m \"<message>\"", "desc": "Record your changes to the local repository history.", "category": "git", "tags": ["manage"], "notes": "Always include a descriptive message.", "examples": ["git commit -m \"Fixed buffer overflow payload\""] },
+    { "id": "git-dork", "title": "git: search for leaks", "cmd": "git log -S \"password\"", "desc": "Search commit history for specific strings (like passwords).", "category": "git", "tags": ["osint", "exploitation"], "notes": "A powerful technique to find credentials removed in later versions.", "examples": ["git log -S \"API_KEY\""] },
+    { "id": "git-privesc", "title": "git: privesc (GTFOBins)", "cmd": "sudo git help config", "desc": "Escalate to root if git has sudo permissions.", "category": "git", "tags": ["exploitation"], "notes": "Inside the pager, type '!/bin/sh' to spawn a root shell.", "examples": ["sudo git help config"] },
+    {
+      "id": "kali-tools",
+      "title": "kali: list installed kali tools",
+      "cmd": "dpkg -l | grep kali",
+      "desc": "Quickly list packages with 'kali' in name.",
+      "category": "kali",
+      "tags": [
+        "packages"
+      ],
+      "notes": "This is not exhaustive, but useful.",
+      "examples": [
+        "dpkg -l | grep kali"
+      ]
+    },
+    {
+      "id": "sec-nmap-help",
+      "title": "security: nmap help",
+      "cmd": "nmap --help",
+      "desc": "Network mapper (help screen).",
+      "category": "security-tools",
+      "tags": [
+        "authorized-only"
+      ],
+      "notes": "Use only on systems you own or have explicit permission to test.",
+      "examples": [
+        "nmap --help",
+        "man nmap"
+      ]
+    },
+    {
+      "id": "sec-metasploit-help",
+      "title": "security: metasploit help",
+      "cmd": "msfconsole -h",
+      "desc": "Metasploit framework (help).",
+      "category": "security-tools",
+      "tags": [
+        "authorized-only"
+      ],
+      "notes": "Use only with authorization.",
+      "examples": [
+        "msfconsole -h"
+      ]
+    },
+    {
+      "id": "sec-wireshark",
+      "title": "security: wireshark",
+      "cmd": "wireshark",
+      "desc": "Packet capture GUI.",
+      "category": "security-tools",
+      "tags": [
+        "capture"
+      ],
+      "notes": "Use only on authorized networks.",
+      "examples": [
+        "wireshark"
+      ]
+    },
+    {
+      "id": "sec-burp",
+      "title": "security: burpsuite",
+      "cmd": "burpsuite",
+      "desc": "Web testing proxy GUI.",
+      "category": "security-tools",
+      "tags": [
+        "authorized-only"
+      ],
+      "notes": "Use only on authorized apps.",
+      "examples": [
+        "burpsuite"
+      ]
+    },
+    {
+      "id": "sec-sqlmap-help",
+      "title": "security: sqlmap help",
+      "cmd": "sqlmap -h",
+      "desc": "SQL injection testing tool (help).",
+      "category": "security-tools",
+      "tags": [
+        "authorized-only"
+      ],
+      "notes": "Use only with explicit permission.",
+      "examples": [
+        "sqlmap -h"
+      ]
+    },
+    {
+      "id": "sec-john-help",
+      "title": "security: john help",
+      "cmd": "john --help",
+      "desc": "Password auditing (help).",
+      "category": "security-tools",
+      "tags": [
+        "authorized-only"
+      ],
+      "notes": "Use only for permitted password audits.",
+      "examples": [
+        "john --help"
+      ]
+    },
+    {
+      "id": "sec-hashcat-help",
+      "title": "security: hashcat help",
+      "cmd": "hashcat -h",
+      "desc": "Hash auditing tool (help).",
+      "category": "security-tools",
+      "tags": [
+        "authorized-only"
+      ],
+      "notes": "Use only on hashes you are authorized to test.",
+      "examples": [
+        "hashcat -h"
+      ]
+    },
+    {
+      "id": "recon-theharvester",
+      "title": "recon: theHarvester",
+      "cmd": "theHarvester -d <domain> -b google",
+      "desc": "Gather emails, subdomains, and names.",
+      "category": "recon",
+      "tags": [
+        "osint"
+      ],
+      "notes": "Uses various public sources.",
+      "examples": [
+        "theHarvester -d microsoft.com -l 500 -b google"
+      ]
+    },
+    {
+      "id": "recon-dnsrecon",
+      "title": "recon: DNS enumeration",
+      "cmd": "dnsrecon -d <domain>",
+      "desc": "Check for zone transfers and enumerate DNS.",
+      "category": "recon",
+      "tags": [
+        "dns"
+      ],
+      "notes": "",
+      "examples": [
+        "dnsrecon -d example.com"
+      ]
+    },
+    {
+      "id": "recon-whois",
+      "title": "recon: WHOIS lookup",
+      "cmd": "whois <domain>",
+      "desc": "Get domain registration ownership info.",
+      "category": "recon",
+      "tags": [
+        "osint"
+      ],
+      "notes": "",
+      "examples": [
+        "whois google.com"
+      ]
+    },
+    {
+      "id": "web-dirsearch",
+      "title": "web: directory search",
+      "cmd": "dirsearch -u <url> -e php,html,js",
+      "desc": "Advanced web path brute-forcer.",
+      "category": "web-pentest",
+      "tags": [
+        "discovery"
+      ],
+      "notes": "Checks for common directories and file extensions.",
+      "examples": [
+        "dirsearch -u http://target.com -e php,txt"
+      ]
+    },
+    {
+      "id": "web-ffuf",
+      "title": "web: fast fuzzer (ffuf)",
+      "cmd": "ffuf -u <url>/FUZZ -w <wordlist>",
+      "desc": "Extremely fast HTTP fuzzer for discovery.",
+      "category": "web-pentest",
+      "tags": [
+        "fuzzing"
+      ],
+      "notes": "Filter results with -fc (filter code) or -fs (filter size).",
+      "examples": [
+        "ffuf -u http://10.10.10.1/FUZZ -w /usr/share/wordlists/dirb/common.txt -fc 404"
+      ]
+    },
+    {
+      "id": "web-nikto",
+      "title": "web: vulnerability scanner",
+      "cmd": "nikto -h <url>",
+      "desc": "Scans for dangerous files, outdated server software and misconfigurations.",
+      "category": "web-pentest",
+      "tags": [
+        "scanner"
+      ],
+      "notes": "Noisy, but very thorough for older vulnerabilities.",
+      "examples": [
+        "nikto -h https://example.com"
+      ]
+    },
+    {
+      "id": "web-sqlmap",
+      "title": "web: sql injection tool",
+      "cmd": "sqlmap -u \"<url>?id=1\" --dbs",
+      "desc": "Automatic SQL injection and database takeover tool.",
+      "category": "web-pentest",
+      "tags": [
+        "exploitation",
+        "sqli"
+      ],
+      "notes": "Use --batch to skip interactive prompts.",
+      "examples": [
+        "sqlmap -u \"http://site.com/page.php?id=1\" --dump --batch"
+      ]
+    },
+    {
+      "id": "web-wpscan",
+      "title": "web: wordpress scanner",
+      "cmd": "wpscan --url <url> -e u,vp,vt",
+      "desc": "Identify vulnerabilities in WordPress sites.",
+      "category": "web-pentest",
+      "tags": [
+        "scanner",
+        "cms"
+      ],
+      "notes": "-e u: enumerate users, vp: vulnerable plugins, vt: vulnerable themes.",
+      "examples": [
+        "wpscan --url https://blog.com --enumerate u"
+      ]
+    },
+    {
+      "id": "web-sublist3r",
+      "title": "web: subdomain discovery",
+      "cmd": "sublist3r -d <domain>",
+      "desc": "Find subdomains using many OSINT sources.",
+      "category": "web-pentest",
+      "tags": [
+        "recon"
+      ],
+      "notes": "Combines results from Google, Bing, VirusTotal, etc.",
+      "examples": [
+        "sublist3r -d google.com"
+      ]
+    },
+    {
+      "id": "web-whatweb",
+      "title": "web: tech stack fingerprinter",
+      "cmd": "whatweb <url>",
+      "desc": "Identifies CMS, blogging platforms, stats packages, JavaScript libraries, and more.",
+      "category": "web-pentest",
+      "tags": [
+        "recon"
+      ],
+      "notes": "Helps determine the 'flavor' of the web server.",
+      "examples": [
+        "whatweb https://example.com"
+      ]
+    },
+    {
+      "id": "web-commix",
+      "title": "web: command injection",
+      "cmd": "commix -u \"<url>?id=1\"",
+      "desc": "Automated OS command injection tool.",
+      "category": "web-pentest",
+      "tags": [
+        "exploitation"
+      ],
+      "notes": "Used when a web app passes user input to a system shell.",
+      "examples": [
+        "commix -u \"http://target.com/search.php?name=test\""
+      ]
+    },
+    {
+      "id": "web-gobuster-vhost",
+      "title": "web: vhost discovery",
+      "cmd": "gobuster vhost -u <url> -w <wordlist>",
+      "desc": "Brute-force Virtual Hosts (VHosts) on a server.",
+      "category": "web-pentest",
+      "tags": [
+        "recon"
+      ],
+      "notes": "Essential for finding hidden sites on the same IP.",
+      "examples": [
+        "gobuster vhost -u http://10.10.10.1 -w /usr/share/wordlists/dirbuster/directory-list-2.3-medium.txt"
+      ]
+    },
+    {
+      "id": "docker-ps",
+      "title": "docker: list containers",
+      "cmd": "docker ps -a",
+      "desc": "Show all running and stopped containers.",
+      "category": "docker",
+      "tags": [
+        "manage"
+      ],
+      "notes": "Use --format to clean up output.",
+      "examples": [
+        "docker ps",
+        "docker ps -a"
+      ]
+    },
+    {
+      "id": "docker-images",
+      "title": "docker: list images",
+      "cmd": "docker images",
+      "desc": "Show all downloaded/built images.",
+      "category": "docker",
+      "tags": [
+        "manage"
+      ],
+      "notes": "",
+      "examples": [
+        "docker images"
+      ]
+    },
+    {
+      "id": "docker-run",
+      "title": "docker: run container",
+      "cmd": "docker run -it --rm <image> /bin/bash",
+      "desc": "Run an interactive container and remove it after exit.",
+      "category": "docker",
+      "tags": [
+        "manage"
+      ],
+      "notes": "-i (interactive), -t (tty), --rm (auto-remove).",
+      "examples": [
+        "docker run -it --rm ubuntu /bin/bash"
+      ]
+    },
+    {
+      "id": "docker-exec",
+      "title": "docker: shell into running",
+      "cmd": "docker exec -it <container_id> /bin/bash",
+      "desc": "Open a shell inside an already running container.",
+      "category": "docker",
+      "tags": [
+        "manage"
+      ],
+      "notes": "Useful for debugging running services.",
+      "examples": [
+        "docker exec -it web_server /bin/bash"
+      ]
+    },
+    {
+      "id": "docker-logs",
+      "title": "docker: view logs",
+      "cmd": "docker logs -f <container_id>",
+      "desc": "Stream logs from a container.",
+      "category": "docker",
+      "tags": [
+        "debug"
+      ],
+      "notes": "Similar to tail -f.",
+      "examples": [
+        "docker logs -f nginx_proxy"
+      ]
+    },
+    {
+      "id": "docker-inspect",
+      "title": "docker: inspect metadata",
+      "cmd": "docker inspect <container_id>",
+      "desc": "Get low-level info (IPs, mounts, env vars).",
+      "category": "docker",
+      "tags": [
+        "recon"
+      ],
+      "notes": "Often reveals hardcoded credentials in ENV variables.",
+      "examples": [
+        "docker inspect my_app"
+      ]
+    },
+    {
+      "id": "docker-prune",
+      "title": "docker: cleanup system",
+      "cmd": "docker system prune -a",
+      "desc": "Remove all unused containers, networks, and images.",
+      "category": "docker",
+      "tags": [
+        "maintenance"
+      ],
+      "notes": "Warning: This deletes everything not currently in use.",
+      "examples": [
+        "docker system prune"
+      ]
+    },
+    {
+      "id": "docker-cp",
+      "title": "docker: copy files",
+      "cmd": "docker cp <src> <container>:<dst>",
+      "desc": "Copy files between host and container.",
+      "category": "docker",
+      "tags": [
+        "manage"
+      ],
+      "notes": "Works both ways (container to host or host to container).",
+      "examples": [
+        "docker cp exploit.sh victim_ctr:/tmp/"
+      ]
+    },
+    {
+      "id": "docker-bench",
+      "title": "docker: security audit",
+      "cmd": "docker run --rm -v /var/run/docker.sock:/var/run/docker.sock docker/docker-bench-security",
+      "desc": "Check for common security best practices.",
+      "category": "docker",
+      "tags": [
+        "security"
+      ],
+      "notes": "Requires access to the docker.sock.",
+      "examples": [
+        "docker run --rm -v /var/run/docker.sock:/var/run/docker.sock docker/docker-bench-security"
+      ]
+    },
+    {
+      "id": "docker-privesc",
+      "title": "docker: privesc (GTFOBins)",
+      "cmd": "docker run -v /:/mnt --rm -it alpine chroot /mnt sh",
+      "desc": "Escape to host root if user is in 'docker' group.",
+      "category": "docker",
+      "tags": [
+        "exploitation"
+      ],
+      "notes": "Mounts the host filesystem to the container and chroots into it.",
+      "examples": [
+        "docker run -v /:/mnt --rm -it alpine chroot /mnt sh"
+      ]
+    },
+    
+    {
+      "id": "osint-spiderfoot",
+      "title": "osint: spiderfoot",
+      "cmd": "spiderfoot -l 127.0.0.1:5001",
+      "desc": "Automation tool for gathering intelligence from 100+ public data sources.",
+      "category": "osint",
+      "tags": [
+        "recon",
+        "automation"
+      ],
+      "notes": "Starts a web interface on the specified port.",
+      "examples": [
+        "spiderfoot -l 127.0.0.1:5001"
+      ]
+    },
+    {
+      "id": "osint-sherlock",
+      "title": "osint: sherlock",
+      "cmd": "sherlock <username>",
+      "desc": "Hunt down social media accounts by username across hundreds of sites.",
+      "category": "osint",
+      "tags": [
+        "social-media"
+      ],
+      "notes": "Install: sudo apt install sherlock.",
+      "examples": [
+        "sherlock jdoe123"
+      ]
+    },
+    {
+      "id": "osint-theharvester",
+      "title": "osint: theHarvester",
+      "cmd": "theHarvester -d <domain> -b all",
+      "desc": "E-mail, subdomain and name harvester.",
+      "category": "osint",
+      "tags": [
+        "recon"
+      ],
+      "notes": "-b all searches Google, Bing, LinkedIn, etc.",
+      "examples": [
+        "theHarvester -d example.com -l 500 -b google"
+      ]
+    },
+    {
+      "id": "osint-recon-ng",
+      "title": "osint: recon-ng",
+      "cmd": "recon-ng",
+      "desc": "Full-featured web reconnaissance framework (modular).",
+      "category": "osint",
+      "tags": [
+        "framework"
+      ],
+      "notes": "Operates similarly to Metasploit. Use 'marketplace' to install modules.",
+      "examples": [
+        "recon-ng"
+      ]
+    },
+    {
+      "id": "osint-maltego",
+      "title": "osint: maltego",
+      "cmd": "maltego",
+      "desc": "GUI tool for link analysis and data mapping.",
+      "category": "osint",
+      "tags": [
+        "gui",
+        "mapping"
+      ],
+      "notes": "Requires a free account/community edition login.",
+      "examples": [
+        "maltego"
+      ]
+    },
+    {
+      "id": "osint-shodan",
+      "title": "osint: shodan search",
+      "cmd": "shodan search <query>",
+      "desc": "Search the Shodan database for internet-connected devices.",
+      "category": "osint",
+      "tags": [
+        "iot",
+        "recon"
+      ],
+      "notes": "Requires API key: shodan init <key>.",
+      "examples": [
+        "shodan search 'product:Apache'"
+      ]
+    },
+    {
+      "id": "osint-holehe",
+      "title": "osint: holehe",
+      "cmd": "holehe <email>",
+      "desc": "Check if an email is registered on 120+ social media sites.",
+      "category": "osint",
+      "tags": [
+        "email"
+      ],
+      "notes": "Does not alert the user; checks via password recovery endpoints.",
+      "examples": [
+        "holehe test@example.com"
+      ]
+    },
+    {
+      "id": "osint-ghauri",
+      "title": "osint: ghauri",
+      "cmd": "ghauri -u <url>",
+      "desc": "Advanced cross-platform tool for SQL injection and OSINT detection.",
+      "category": "osint",
+      "tags": [
+        "vulnerability"
+      ],
+      "notes": "Great alternative to sqlmap for detection.",
+      "examples": [
+        "ghauri -u http://target.com/page.php?id=1"
+      ]
+    }
+  ]
+}
