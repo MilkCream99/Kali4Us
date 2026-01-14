@@ -1,68 +1,538 @@
 <!doctype html>
 <html lang="en">
+
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
   <title>Kali4Us</title>
-  <link rel="stylesheet" href="assets/style/styles.css"/>
+  <link rel="stylesheet" href="assets/style/styles.css" />
 </head>
 
-<body>
+<body data-view="commands">
   <header id="siteHeader">
     <div class="wrap">
       <div class="topBar">
         <div class="brand">
-          <div class="logo" aria-hidden="true"></div>
+          <div class="logo" aria-hidden="true">
+            <img src="assets/images/logo.jpg" alt="" loading="lazy" decoding="async" />
+          </div>
+
           <div class="titleBox">
-            <h1 id="appTitle">Kali4Us</h1>
+            <h1 id="appTitle">CyberSec4Us</h1>
             <p id="appSubtitle">Incorporating all Kali Linux commands</p>
           </div>
         </div>
       </div>
 
-      <div class="searchPanel">
+      <!-- Command search area (hidden in other tabs) -->
+      <div id="commandSearchArea" class="searchPanel">
         <div class="searchRow">
           <svg class="searchIcon" width="18" height="18" viewBox="0 0 24 24" fill="none" aria-hidden="true">
-            <path d="M10 18a8 8 0 1 1 0-16 8 8 0 0 1 0 16Z" stroke="currentColor" stroke-width="2"/>
-            <path d="M21 21l-4.35-4.35" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+            <path d="M10 18a8 8 0 1 1 0-16 8 8 0 0 1 0 16Z" stroke="currentColor" stroke-width="2" />
+            <path d="M21 21l-4.35-4.35" stroke="currentColor" stroke-width="2" stroke-linecap="round" />
           </svg>
 
           <input id="q" type="search" placeholder="Search command…" autocomplete="off" />
           <button id="clear" type="button" aria-label="Clear search">✕</button>
         </div>
 
-        <div class="chips" id="chips" aria-label="Category filters"></div>
+        <div class="chipsWrap" id="chipsWrap">
+          <div class="chips" id="chips" aria-label="Category filters"></div>
+        </div>
       </div>
     </div>
   </header>
 
   <main>
     <div class="wrap">
-      <div class="meta">
-        <div id="count">Loading…</div>
-        <div id="filterHint"></div>
+      <!-- Tabs -->
+      <div class="tabsBar" role="tablist" aria-label="Main tabs">
+        <button class="tab" id="tabCommands" role="tab" aria-selected="true" type="button">Commands</button>
+        <button class="tab" id="tabDorks" role="tab" aria-selected="false" type="button">Dork Builder</button>
+        <button class="tab" id="tabPassword" role="tab" aria-selected="false" type="button">Password &amp;
+          Policy</button>
+        <button class="tab" id="tabCvss" role="tab" aria-selected="false" type="button">CVSS v3.1</button>
+        <button class="tab" id="tabHash" role="tab" aria-selected="false" type="button">Hash Tools</button>
+        <button class="tab" id="tabCodec" role="tab" aria-selected="false" type="button">Encode</button>
+
+
+
       </div>
 
-      <div class="list" id="results" aria-live="polite"></div>
+      <!-- Commands View -->
+      <section id="commandsView" role="tabpanel" aria-label="Commands view">
+        <div class="meta">
+          <div id="count">Loading…</div>
+          <div id="filterHint"></div>
+        </div>
+        <div class="list" id="results" aria-live="polite"></div>
+      </section>
+
+      <!-- Dork Builder View -->
+      <section id="dorkView" role="tabpanel" aria-label="Dork builder view">
+        <div id="dorkBox">
+          <div class="panelHeader">
+            <span class="panelTitle">Google Dork Builder</span>
+            <span class="panelHint">Enter a domain → generate queries</span>
+          </div>
+
+          <div class="panelBody">
+            <div class="row">
+              <label class="pillLabel" for="dorkDomain">Domain</label>
+              <input id="dorkDomain" class="input" type="text" inputmode="url" placeholder="example.com"
+                autocomplete="off" />
+              <button class="btn" id="dorkGen" type="button">Generate</button>
+              <button class="btn secondary" id="dorkClear" type="button">Clear</button>
+            </div>
+
+            <div class="row">
+              <label class="pillLabel" for="dorkKeyword">Optional keyword</label>
+              <input id="dorkKeyword" class="input" type="text" placeholder="e.g. API, docs, status"
+                autocomplete="off" />
+              <label class="pillLabel" for="dorkFiletype">Filetype</label>
+              <select id="dorkFiletype" class="select">
+                <option value="">Any</option>
+                <option value="pdf">pdf</option>
+                <option value="docx">docx</option>
+                <option value="xlsx">xlsx</option>
+                <option value="pptx">pptx</option>
+                <option value="txt">txt</option>
+                <option value="json">json</option>
+              </select>
+            </div>
+
+            <div class="note">
+              Generates public search queries only. Use on domains you own / are authorized to assess.
+            </div>
+
+            <div id="dorkResults" class="dorkResults" aria-live="polite"></div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Password & Policy View -->
+      <section id="passwordView" role="tabpanel" aria-label="Password and policy view">
+        <div id="pwBox">
+          <div class="panelHeader">
+            <span class="panelTitle">Password / Passphrase Generator + Policy</span>
+            <span class="panelHint">Offline • Uses secure randomness</span>
+          </div>
+
+          <div class="panelBody">
+            <div class="grid2">
+              <!-- Generator -->
+              <div class="card">
+                <div class="row" style="margin-bottom:0;">
+                  <span class="pillLabel">Mode</span>
+                  <select id="pwMode" class="select">
+                    <option value="password">Password</option>
+                    <option value="passphrase">Passphrase</option>
+                  </select>
+                  <button class="btn" id="pwGenerate" type="button">Generate</button>
+                  <button class="btn secondary" id="pwCopy" type="button">Copy</button>
+                </div>
+
+                <div class="row" style="margin-bottom:0;">
+                  <span class="pillLabel">Output</span>
+                  <input id="pwOutput" class="input" type="text" readonly />
+                </div>
+
+                <div class="strengthBar" aria-label="Strength bar">
+                  <div class="strengthFill" id="pwStrengthFill"></div>
+                </div>
+                <div class="kv">
+                  <span id="pwStrengthLabel">Strength: —</span>
+                  <span id="pwEntropyLabel">Entropy: —</span>
+                </div>
+
+                <!-- Password options -->
+                <div id="pwOptsPassword">
+                  <div class="row">
+                    <label class="pillLabel" for="pwLen">Length</label>
+                    <input id="pwLen" class="input" type="number" min="12" max="64" value="16" />
+                  </div>
+                  <div class="row">
+                    <label class="pillLabel"><input id="pwLower" type="checkbox" checked /> lower</label>
+                    <label class="pillLabel"><input id="pwUpper" type="checkbox" checked /> upper</label>
+                    <label class="pillLabel"><input id="pwNums" type="checkbox" checked /> numbers</label>
+                    <label class="pillLabel"><input id="pwSyms" type="checkbox" /> symbols</label>
+                  </div>
+                  <div class="note">
+                    Tip: length matters most. Use a password manager + MFA.
+                  </div>
+                </div>
+
+                <!-- Passphrase options -->
+                <div id="pwOptsPassphrase" style="display:none;">
+                  <div class="row">
+                    <label class="pillLabel" for="ppWords">Words</label>
+                    <input id="ppWords" class="input" type="number" min="4" max="10" value="5" />
+                    <label class="pillLabel" for="ppSep">Separator</label>
+                    <select id="ppSep" class="select">
+                      <option value="-">-</option>
+                      <option value=" ">space</option>
+                      <option value=".">.</option>
+                      <option value="_">_</option>
+                    </select>
+                  </div>
+                  <div class="row">
+                    <label class="pillLabel"><input id="ppCap" type="checkbox" checked /> Capitalize</label>
+                    <label class="pillLabel"><input id="ppAddNum" type="checkbox" checked /> Add number</label>
+                  </div>
+                  <div class="note">
+                    Passphrases are easy to type and very strong when long enough.
+                  </div>
+                </div>
+              </div>
+
+              <!-- Policy -->
+              <div class="card">
+                <div class="row" style="margin-bottom:0;">
+                  <span class="pillLabel">Policy Builder</span>
+                  <button class="btn" id="polBuild" type="button">Generate Policy</button>
+                  <button class="btn secondary" id="polCopy" type="button">Copy</button>
+                </div>
+
+                <div class="row">
+                  <label class="pillLabel" for="polMinLen">Min length</label>
+                  <input id="polMinLen" class="input" type="number" min="8" max="128" value="14" />
+                  <label class="pillLabel" for="polMfa">MFA</label>
+                  <select id="polMfa" class="select">
+                    <option value="required">Required</option>
+                    <option value="recommended">Recommended</option>
+                  </select>
+                </div>
+
+                <div class="row">
+                  <label class="pillLabel" for="polLock">Lockout after</label>
+                  <input id="polLock" class="input" type="number" min="3" max="20" value="10" />
+                  <label class="pillLabel" for="polReuse">Reuse</label>
+                  <select id="polReuse" class="select">
+                    <option value="disallow">Disallow reuse (recommended)</option>
+                    <option value="allow">Allow reuse (not recommended)</option>
+                  </select>
+                </div>
+
+                <textarea id="polOut" class="textarea"></textarea>
+
+                <div class="note">
+                  This is a general template. Adjust for your org and regulatory needs.
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+      </section>
+      <!-- -- CVSS v3.1 View (not implemented)  -->
+      <section id="cvssView" role="tabpanel" aria-label="CVSS calculator view">
+        <div id="cvssBox">
+          <div class="panelHeader">
+            <span class="panelTitle">CVSS v3.1 Base Score Calculator</span>
+            <span class="panelHint">Offline • Base metrics only</span>
+          </div>
+
+          <div class="panelBody">
+            <div class="grid2">
+              <div class="card">
+                <div class="row">
+                  <span class="pillLabel">Attack Vector (AV)</span>
+                  <select id="cvssAV" class="select">
+                    <option value="N">Network (N)</option>
+                    <option value="A">Adjacent (A)</option>
+                    <option value="L">Local (L)</option>
+                    <option value="P">Physical (P)</option>
+                  </select>
+
+                  <span class="pillLabel">Attack Complexity (AC)</span>
+                  <select id="cvssAC" class="select">
+                    <option value="L">Low (L)</option>
+                    <option value="H">High (H)</option>
+                  </select>
+                </div>
+
+                <div class="row">
+                  <span class="pillLabel">Privileges Required (PR)</span>
+                  <select id="cvssPR" class="select">
+                    <option value="N">None (N)</option>
+                    <option value="L">Low (L)</option>
+                    <option value="H">High (H)</option>
+                  </select>
+
+                  <span class="pillLabel">User Interaction (UI)</span>
+                  <select id="cvssUI" class="select">
+                    <option value="N">None (N)</option>
+                    <option value="R">Required (R)</option>
+                  </select>
+                </div>
+
+                <div class="row">
+                  <span class="pillLabel">Scope (S)</span>
+                  <select id="cvssS" class="select">
+                    <option value="U">Unchanged (U)</option>
+                    <option value="C">Changed (C)</option>
+                  </select>
+                </div>
+
+                <div class="row">
+                  <span class="pillLabel">Confidentiality (C)</span>
+                  <select id="cvssC" class="select">
+                    <option value="N">None (N)</option>
+                    <option value="L">Low (L)</option>
+                    <option value="H">High (H)</option>
+                  </select>
+
+                  <span class="pillLabel">Integrity (I)</span>
+                  <select id="cvssI" class="select">
+                    <option value="N">None (N)</option>
+                    <option value="L">Low (L)</option>
+                    <option value="H">High (H)</option>
+                  </select>
+
+                  <span class="pillLabel">Availability (A)</span>
+                  <select id="cvssA" class="select">
+                    <option value="N">None (N)</option>
+                    <option value="L">Low (L)</option>
+                    <option value="H">High (H)</option>
+                  </select>
+                </div>
+
+                <div class="row" style="justify-content:flex-end;">
+                  <button class="btn" id="cvssCalc" type="button">Calculate</button>
+                  <button class="btn secondary" id="cvssCopyVector" type="button">Copy Vector</button>
+                </div>
+              </div>
+
+              <div class="card">
+                <div class="kv">
+                  <span id="cvssScoreLabel">Base Score: —</span>
+                  <span id="cvssSeverityLabel">Severity: —</span>
+                </div>
+
+                <div class="strengthBar" aria-label="CVSS score bar">
+                  <div class="strengthFill" id="cvssBarFill"></div>
+                </div>
+
+                <div class="row" style="margin-bottom:0;">
+                  <span class="pillLabel">Vector</span>
+                </div>
+                <textarea id="cvssVector" class="textarea" readonly></textarea>
+
+                <div class="note">
+                  This is CVSS v3.1 <b>Base Score</b> only (no Temporal/Environmental).
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+      <!-- Hash Tools View -->
+      <section id="hashView" role="tabpanel" aria-label="Hash tools view">
+        <div id="hashBox">
+          <div class="panelHeader">
+            <span class="panelTitle">Hash Identifier + Local Hashing</span>
+            <span class="panelHint">Offline • No cracking</span>
+          </div>
+
+          <div class="panelBody">
+            <div class="grid2">
+
+              <!-- Identifier -->
+              <div class="card">
+                <div class="row" style="margin-bottom:0;">
+                  <span class="pillLabel">Hash Identifier</span>
+                  <button class="btn secondary" id="hashIdClear" type="button">Clear</button>
+                </div>
+
+                <div class="row">
+                  <span class="pillLabel">Paste hash</span>
+                  <input id="hashInput" class="input" type="text" placeholder="e.g. 5f4dcc3b5aa765d61d8327deb882cf99"
+                    autocomplete="off" />
+                  <button class="btn" id="hashIdentify" type="button">Identify</button>
+                </div>
+
+                <textarea id="hashIdOut" class="textarea" readonly placeholder="Result will show here..."></textarea>
+
+                <div class="btnRow">
+                  <button class="btn secondary" id="hashIdCopy" type="button">Copy Result</button>
+                </div>
+
+                <div class="note">
+                  This is a best-effort guess (many hashes share the same length).
+                </div>
+              </div>
+
+              <!-- Local hashing -->
+              <div class="card">
+                <div class="row" style="margin-bottom:0;">
+                  <span class="pillLabel">Local Hashing</span>
+                  <input id="hashAlgSearch" class="input" type="search" placeholder="Search algorithm..."
+                    autocomplete="off" />
+
+                  <select id="hashAlg" class="select">
+                    <optgroup label="Cryptographic (WebCrypto)">
+                      <option value="SHA-256">SHA-256</option>
+                      <option value="SHA-1">SHA-1</option>
+                      <option value="SHA-384">SHA-384</option>
+                      <option value="SHA-512">SHA-512</option>
+                    </optgroup>
+
+                    <optgroup label="Cryptographic (Offline JS)">
+                      <option value="MD5">MD5</option>
+                    </optgroup>
+
+                    <optgroup label="Checksum / Fast Hash (Offline JS)">
+                      <option value="CRC32">CRC32</option>
+                      <option value="ADLER32">Adler-32</option>
+                      <option value="FNV1A32">FNV-1a 32-bit</option>
+                      <option value="FNV1A64">FNV-1a 64-bit</option>
+                    </optgroup>
+                  </select>
+
+                  <button class="btn" id="hashTextBtn" type="button">Hash Text</button>
+                  <button class="btn secondary" id="hashOutCopy" type="button">Copy</button>
+                </div>
+
+                <div class="row">
+                  <span class="pillLabel">Text</span>
+                  <input id="hashText" class="input" type="text" placeholder="Type text to hash..."
+                    autocomplete="off" />
+                </div>
+
+                <div class="row">
+                  <span class="pillLabel">File</span>
+                  <input id="hashFile" class="input" type="file" />
+                  <button class="btn" id="hashFileBtn" type="button">Hash File</button>
+                </div>
+
+                <textarea id="hashOut" class="textarea" readonly placeholder="Hash output..."></textarea>
+
+                <div class="note">
+                  Uses your browser’s Web Crypto API. Nothing is uploaded.
+                </div>
+              </div>
+
+            </div>
+          </div>
+        </div>
+
+      </section>
+      <!-- Encode / Decode View -->
+      <!-- Encode / Decode View (CLEAN) -->
+      <!-- Encode / Decode View (CyberChef-lite) -->
+      <section id="codecView" role="tabpanel" aria-label="Encode decode tools view">
+        <div id="codecBox">
+          <div class="panelHeader">
+            <span class="panelTitle">Encode / Decode (Recipe)</span>
+            <span class="panelHint">Offline • Chain operations like CyberChef</span>
+          </div>
+
+          <div class="panelBody">
+            <div class="grid2">
+
+              <!-- Left: Operations + Recipe -->
+              <div class="card chefCard">
+                <div class="row" style="margin-bottom:0;">
+                  <span class="pillLabel">Operations</span>
+
+                  <select id="chefOpSelect" class="select">
+                    <option value="to_b64">To Base64</option>
+                    <option value="from_b64">From Base64</option>
+                    <option value="url_enc">URL Encode</option>
+                    <option value="url_dec">URL Decode</option>
+                    <option value="to_hex">Text → Hex</option>
+                    <option value="from_hex">Hex → Text</option>
+                    <option value="html_enc">HTML Entity Encode</option>
+                    <option value="html_dec">HTML Entity Decode</option>
+                    <option value="json_pretty">JSON Pretty Print</option>
+                    <option value="json_min">JSON Minify</option>
+                    <option value="trim">Trim</option>
+                    <option value="lower">Lowercase</option>
+                    <option value="upper">Uppercase</option>
+                    <option value="defang">Defang URL/Domain</option>
+                    <option value="refang">Refang URL/Domain</option>
+                    <option value="jwt_decode">JWT Decode (no verify)</option>
+                  </select>
+
+                  <button class="btn" id="chefAddOp" type="button">Add</button>
+                </div>
+
+                <div class="row">
+                  <label class="pillLabel">
+                    <input id="chefAutoRun" type="checkbox" checked />
+                    Auto-run
+                  </label>
+
+                  <button class="btn secondary" id="chefRun" type="button">Run</button>
+                  <button class="btn secondary" id="chefClearRecipe" type="button">Clear Recipe</button>
+                </div>
+
+                <div class="note">
+                  Recipe runs top → bottom. Reorder with ↑ ↓. Everything runs locally (offline).
+                </div>
+
+                <div id="chefRecipe" class="chefRecipe" aria-live="polite"></div>
+              </div>
+
+              <!-- Right: Input/Output -->
+              <div class="card chefCard">
+                <div class="chefIO">
+                  <div class="chefBlock">
+                    <div class="chefLabelRow">
+                      <span class="pillLabel">Input</span>
+                      <div class="btnRow">
+                        <button class="btn secondary chefMini" id="chefPaste" type="button">Paste</button>
+                        <button class="btn secondary chefMini" id="chefSwap" type="button">Swap</button>
+                        <button class="btn secondary chefMini" id="chefClearIO" type="button">Clear</button>
+                      </div>
+                    </div>
+                    <textarea id="chefIn" class="textarea chefTA" placeholder="Type or paste here..."></textarea>
+                  </div>
+
+                  <div class="chefBlock">
+                    <div class="chefLabelRow">
+                      <span class="pillLabel">Output</span>
+                      <span class="chefMeta" id="chefMeta">—</span>
+                    </div>
+                    <textarea id="chefOut" class="textarea chefTA" readonly
+                      placeholder="Output will appear here..."></textarea>
+
+                    <div class="btnRow">
+                      <button class="btn secondary" id="chefCopy" type="button">Copy Output</button>
+                    </div>
+
+                    <div class="note" id="chefErr" style="display:none;"></div>
+                  </div>
+                </div>
+              </div>
+
+            </div>
+          </div>
+        </div>
+      </section>
+
+
+
     </div>
+    <!-- CVSS View -->
+
+
+
   </main>
 
-  <footer>
+  <!-- <footer>
     <div class="footerInner">
-      <div class="footerLeft">
-        <p class="footerTitle">Kali4Us • Command Finder</p>
-        <p class="footerSub">Quick search and copy Kali Linux commands. <span id="footerYear"></span></p>
-      </div>
+      <p class="footerSub">Kali4Us • Command Finder <span id="footerYear"></span></p>
     </div>
-  </footer>
+  </footer> -->
 
   <div class="toast" id="toast" role="status" aria-live="polite"></div>
 
-  <!-- ✅ Go to Top -->
   <button id="toTop" type="button" aria-label="Go to top">
     ⬆ <span class="mini">Top</span>
   </button>
 
   <script src="assets/scripts/app.js"></script>
 </body>
+
 </html>
